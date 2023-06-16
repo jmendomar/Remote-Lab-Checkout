@@ -3,6 +3,7 @@ import json
 import tkinter.messagebox as MessageBox
 import tkinter as Tk
 import sys
+from cryptography.fernet import Fernet
 from datetime import date, timedelta
 from ldap3 import Connection, Server
 from mysql.connector.locales.eng import client_error
@@ -17,7 +18,7 @@ from PIL import ImageTk, Image
 
 root = Tk()
 # root.geometry("1525x900")
-root.title("Remote Check Out/In v0.2.3")
+root.title("Remote Check Out/In v0.2.4")
 
 wwid = ""
 currUser = ""
@@ -29,16 +30,32 @@ filterOptions = ["id","location","prodName","serialNo","prodStatus","codename","
 filterOptionValue = StringVar()
 
 #Functions
+def decryptConfig():
+    # Loads the encryption key from file
+    with open('Assets\\encryption_key.key', 'rb') as key_file:
+        key = key_file.read()
+    
+    # Decrypts the JSON file
+    with open("config.json", 'rb') as file:
+        encrypted_data = file.read()
+
+    f = Fernet(key)
+    decrypted_data = f.decrypt(encrypted_data)
+    return decrypted_data
+
 #loads file with credentials
-def loadConfig(file):
-    try:
-        with open(file, 'r') as conf:
-            data = json.load(conf)
-            print(f"{Fore.GREEN}[{datetime.now()}]: Config File loaded{Style.RESET_ALL}")
-            return data
-    except Exception as e:
-        print(f"{Fore.RED}[{datetime.now()}]: Config Error : {e}{Style.RESET_ALL}")
-        sys.exit()
+def loadEncryptedConfig(decryptedData):
+    data = json.loads(decryptedData)
+    return data
+# def loadConfig(file):
+#     try:
+#         with open(file, 'r') as conf:
+#             data = json.load(conf)
+#             print(f"{Fore.GREEN}[{datetime.now()}]: Config File loaded{Style.RESET_ALL}")
+#             return data
+#     except Exception as e:
+#         print(f"{Fore.RED}[{datetime.now()}]: Config Error : {e}{Style.RESET_ALL}")
+#         sys.exit()
 
 #Created the connection the database
 def create_mysqlConnection(dbHostName, dbName, userName, userPassword, dbPort):
@@ -891,7 +908,10 @@ columns = ["id","location","prodName","serialNo","prodStatus","codename","user",
 defaultPfp = "Assets/Images/pfp.jpg"
 image = Image.open(defaultPfp)
 
-data = loadConfig("config.json")
+# data = loadConfig("config.json")
+decrypted_config = decryptConfig()
+data = loadEncryptedConfig(decrypted_config)
+
 dbHostName = data['dbHost']
 dbName = data['dbName']
 userName = data['dbUser']
