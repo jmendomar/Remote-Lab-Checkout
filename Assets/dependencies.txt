@@ -1,5 +1,5 @@
-sqlalchemy
-mysql-connector-python
+sqlalchemy==1.4.46
+mysql-connector-python==8.0.32
 colorama
 ldap3
 pillow
