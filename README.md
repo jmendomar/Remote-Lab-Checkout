@@ -20,6 +20,7 @@
 - ldap3
 - pillow
 - pandas
+- cryptography
 
 ## How to get started
 - Install Python 3.11 from the link above. It is recommended that it is installed from the
