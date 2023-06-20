@@ -10,6 +10,7 @@
 
 ## Required Python Version
 - Python 3.11 (https://apps.microsoft.com/store/detail/python-311/9NRWMJP3717K?hl=en-us&gl=us)
+- (Code issues have been encountered due to older python versions please use 3.11)
 
 ## Required Libraries
 - sqlalchemy
@@ -18,6 +19,8 @@
 - colorama
 - ldap3
 - pillow
+- pandas
+- cryptography
 
 ## How to get started
 - Install Python 3.11 from the link above. It is recommended that it is installed from the
