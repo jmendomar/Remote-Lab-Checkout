@@ -4,3 +4,4 @@ colorama
 ldap3
 pillow
 cryptography
+pandas
