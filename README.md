@@ -54,7 +54,7 @@ python3 .\newMain.py
 ### Along with the checkout program there is also a "enforcer tool" that will send a email notification with the unit id the user has checked out
 - To run it just change the directory to folder inside Assets called EnforcingTools(The path will be different for every user)
 ```
-cd C:\Users\jesusi2x\OneDrive - Intel Corporation\Documents\GitHub\'Remote-Lab-Checkout'\Assets\EnforcingTools
+cd C:\Users\jesusi2x\'OneDrive - Intel Corporation'\Documents\GitHub\Remote-Lab-Checkout\Assets\EnforcingTools
 ```
 ### And now you can run the tool with the command below
 ```
