@@ -4,7 +4,7 @@
 |  \ |___  |  | \__/  |  |___    |___ /~~\ |__)    \__, |  | |___ \__, |  \ \__/ \__/  |  
 ```
 
-# Version: v0.2.4
+# Version: v0.2.5
 ### By *jesusi2x*
 ### Contact @ *jesusx.isaac.mendoza.martinez@intel.com* for any Issues
 
