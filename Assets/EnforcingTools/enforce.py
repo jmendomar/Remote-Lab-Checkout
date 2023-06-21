@@ -90,8 +90,8 @@ def preCheckAndPrepare():
 
 def sendEmail(receiver, user, unit):
     sender = "gcs_remote_lab_fl@intel.com"
-    subject = "NUC Checkout"
-    message = f"Hello {user},\n Nuc unit with ID: {unit} is due today or past due please extend or return the unit.\n If this is a mistake please contact jesusi2x @ jesusx.isaac.mendoza.martinez@intel.com "
+    subject = "NUC Checkout(Do not Reply!!!)"
+    message = f"Hello {user},\nNuc unit with ID: {unit} is due today or past due please extend or return the unit.\n If this is a mistake please contact jesusi2x @ jesusx.isaac.mendoza.martinez@intel.com "
 
     msg = MIMEMultipart()
     msg['From'] = sender

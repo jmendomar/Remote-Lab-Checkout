@@ -18,7 +18,7 @@ from PIL import ImageTk, Image
 
 root = Tk()
 # root.geometry("1525x900")
-root.title("Remote Check Out/In v0.2.4")
+root.title("Remote Check Out/In v0.2.5")
 
 wwid = ""
 currUser = ""
@@ -196,15 +196,15 @@ def loginStage2(authenticated, user):
 
         data = userSearch.fetchall()
 
-        for row in data:
-            idsid = row[1]
-            wwid = row[2]
-            name = row[3]
-            email = row[4]
-
-        if authenticated == True and data == []:
-            print(f"{Fore.YELLOW}[{datetime.now()}]: Login Stage 2 : {idsid} Not in db{Style.RESET_ALL}")
-            print(f"{Fore.GREEN}[{datetime.now()}]: Login Stage 2 : Adding {idsid} to db{Style.RESET_ALL}")
+        if data != []:
+            for row in data:
+                idsid = row[1]
+                wwid = row[2]
+                name = row[3]
+                email = row[4]
+        if data == []:
+            print(f"{Fore.YELLOW}[{datetime.now()}]: Login Stage 2 : {user} Not in db{Style.RESET_ALL}")
+            print(f"{Fore.GREEN}[{datetime.now()}]: Login Stage 2 : Adding {user} to db{Style.RESET_ALL}")
             userInfo = Toplevel()
 
             logWwidLabel = Label(userInfo, text="Intel WWID:")
