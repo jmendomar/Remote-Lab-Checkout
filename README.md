@@ -4,9 +4,10 @@
 |  \ |___  |  | \__/  |  |___    |___ /~~\ |__)    \__, |  | |___ \__, |  \ \__/ \__/  |  
 ```
 
-# Version: v0.2.5
+# Version: v0.2.6
 ### By *jesusi2x*
 ### Contact @ *jesusx.isaac.mendoza.martinez@intel.com* for any Issues
+### Supported Windows and Ubuntu
 
 ## Required Python Version
 - Python 3.11 (https://apps.microsoft.com/store/detail/python-311/9NRWMJP3717K?hl=en-us&gl=us)
