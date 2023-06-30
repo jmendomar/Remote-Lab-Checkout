@@ -12,7 +12,7 @@ from cryptography.fernet import Fernet
 
 def decryptConfig():
     # Loads the encryption key from file
-    with open('Assets\\encryption_key.key', 'rb') as key_file:
+    with open('Assets\\encryption.key', 'rb') as key_file:
         key = key_file.read()
         print(f"{Fore.GREEN}[{datetime.now()}]: decryptConfig : Encryption Key loaded{Style.RESET_ALL}")
     

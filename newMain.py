@@ -3,6 +3,7 @@ import json
 import tkinter.messagebox as MessageBox
 import tkinter as Tk
 import sys
+import platform
 from cryptography.fernet import Fernet
 from datetime import date, timedelta
 from ldap3 import Connection, Server
@@ -18,8 +19,9 @@ from PIL import ImageTk, Image
 
 root = Tk()
 # root.geometry("1525x900")
-root.title("Remote Check Out/In v0.2.5")
+root.title("Remote Check Out/In v0.2.6")
 
+os = ""
 wwid = ""
 currUser = ""
 startDate = date.today()
@@ -28,12 +30,26 @@ dateRange = [startDate + timedelta(days=i) for i in range((endDate - startDate).
 dateOptions = [d.strftime("%Y-%m-%d") for d in dateRange]
 filterOptions = ["id","location","prodName","serialNo","prodStatus","codename","user","status","dueDate"]
 filterOptionValue = StringVar()
+linuxKeyPath = 'Assets/encryption.key'
+windowsKeyPath = "Assets\\encryption.key"
 
 #Functions
+def osCheck():
+    global os
+    osName = platform.system()
+    osVersion = platform.release()
+    print(f"Os:{osName}, Os Version:{osVersion}")
+    os = osName
+
 def decryptConfig():
-    # Loads the encryption key from file
-    with open('Assets\\encryption_key.key', 'rb') as key_file:
-        key = key_file.read()
+    if os == "Linux":
+        # Loads the encryption key from file
+        with open(linuxKeyPath, 'rb') as key_file:
+            key = key_file.read()
+    if os == "Windows":
+        # Loads the encryption key from file
+        with open(windowsKeyPath, 'rb') as key_file:
+            key = key_file.read()
     
     # Decrypts the JSON file
     with open("config.json", 'rb') as file:
@@ -47,15 +63,6 @@ def decryptConfig():
 def loadEncryptedConfig(decryptedData):
     data = json.loads(decryptedData)
     return data
-# def loadConfig(file):
-#     try:
-#         with open(file, 'r') as conf:
-#             data = json.load(conf)
-#             print(f"{Fore.GREEN}[{datetime.now()}]: Config File loaded{Style.RESET_ALL}")
-#             return data
-#     except Exception as e:
-#         print(f"{Fore.RED}[{datetime.now()}]: Config Error : {e}{Style.RESET_ALL}")
-#         sys.exit()
 
 #Created the connection the database
 def create_mysqlConnection(dbHostName, dbName, userName, userPassword, dbPort):
@@ -898,12 +905,13 @@ searchButton.configure(foreground='White')
 searchButton.grid(row=0, column=5, padx=5, pady=5)
 
 #Variables and function calls
-#
 geoOptions = ["AMR", "GER", "GAR"]
 locationRow = ["a","b","c","d","e"]
 locationUnitNum = ["1","2","3","4","5"]
 searchOptions = ["id", "location", "serial", "Production Status", "Codename", "User", "Status", "Due Date" ]
 columns = ["id","location","prodName","serialNo","prodStatus","codename","user","status","dueDate"]
+
+osCheck()
 
 defaultPfp = "Assets/Images/pfp.jpg"
 image = Image.open(defaultPfp)
